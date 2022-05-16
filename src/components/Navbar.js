@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
   const [admin] = useAdmin();
+  const { pathname } = useLocation();
 
   return (
     <div class="drawer  drawer-end" data-theme={dark ? "dark" : "light"}>
@@ -12,12 +13,14 @@ const Navbar = ({ children }) => {
       <div class="drawer-content flex flex-col">
         <div class="w-full navbar bg-base-100 fixed top-0 z-50 lg:px-20">
           {/* btn */}
-          <label
-            for="my-drawer-2"
-            class="cursor-pointer drawer-button lg:hidden"
-          >
-            ...
-          </label>
+          {pathname.includes("dashboard") && (
+            <label
+              for="my-drawer-2"
+              class="cursor-pointer drawer-button lg:hidden"
+            >
+              <span className="text-4xl font-bold">...</span>
+            </label>
+          )}
           {/* btn */}
           <div class="flex-1 px-2 mx-2 text-3xl text-orange-500 font-bold">
             Clean <span className="text-green-600 ml-2">Co.</span>
