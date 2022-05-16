@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
+  const [admin] = useAdmin();
 
   return (
     <div class="drawer  drawer-end" data-theme={dark ? "dark" : "light"}>
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col">
         <div class="w-full navbar bg-base-100 fixed top-0 z-50 lg:px-20">
+          {/* btn */}
+          <label
+            for="my-drawer-2"
+            class="cursor-pointer drawer-button lg:hidden"
+          >
+            ...
+          </label>
+          {/* btn */}
           <div class="flex-1 px-2 mx-2 text-3xl text-orange-500 font-bold">
             Clean <span className="text-green-600 ml-2">Co.</span>
           </div>
@@ -52,6 +62,13 @@ const Navbar = ({ children }) => {
                   Contact
                 </NavLink>
               </li>
+              {admin && (
+                <li>
+                  <NavLink to="/dashboard" className="rounded-lg">
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
               <li>
                 <NavLink to="/login" className="rounded-lg">
                   Login
@@ -128,6 +145,13 @@ const Navbar = ({ children }) => {
               Contact
             </NavLink>
           </li>
+          {admin && (
+            <li>
+              <NavLink to="/dashboard" className="rounded-lg">
+                Dashboard
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink to="/login" className="rounded-lg">
               Login
