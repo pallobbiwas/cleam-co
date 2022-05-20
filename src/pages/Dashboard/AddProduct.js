@@ -15,6 +15,7 @@ const AddProduct = () => {
     const res = await fetecher.post("/service", serviceData);
     console.log(res);
     reset();
+    setImgUrl("")
   };
 
   const handelImagUpload = (e) => {
@@ -71,7 +72,7 @@ const AddProduct = () => {
             {...register("price", { required: true })}
           />
           <br />
-          <input className="btn btn-primary" type="submit" />
+          <input disabled={!imgUrl ? true: false} className="btn btn-primary" type="submit" />
         </form>
       </div>
     </div>
