@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 
@@ -7,8 +7,16 @@ const Navbar = ({ children }) => {
   const [admin] = useAdmin();
   const { pathname } = useLocation();
 
+  useEffect(() => {}, [dark]);
+
+  const darkMOde = () => {
+    setDark(!dark);
+    localStorage.setItem("theme", dark);
+  };
+  const changeTheme = JSON.parse(localStorage.getItem("theme"));
+  console.log(changeTheme, typeof(changeTheme));
   return (
-    <div class="drawer  drawer-end" data-theme={dark ? "dark" : "light"}>
+    <div class="drawer  drawer-end" data-theme={changeTheme ? "dark" : "light"}>
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col">
         <div class="w-full navbar bg-base-100 fixed top-0 z-50 lg:px-20">
@@ -99,7 +107,7 @@ const Navbar = ({ children }) => {
               </li>
               <label class="swap swap-rotate">
                 <input
-                  onClick={() => setDark(!dark)}
+                  onClick={darkMOde}
                   type="checkbox"
                   data-toggle-theme="dark,light"
                 />
